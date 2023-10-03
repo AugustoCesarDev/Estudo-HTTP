@@ -75,5 +75,98 @@ Resposta
     Server: CERN/3.0 libwww/2.17
     Content-Type: text/gif
     (image content)
-    
+
 Entre 1991-1995, estes foram introduzidos com uma abordagem de tentativa e ver. Um servidor e um navegador adicionariam um recurso e veriam se ele ganhava força. Problemas de interoperabilidade eram comuns. Em um esforço para resolver esses problemas, um documento informativo que descreveu as práticas comuns foi publicado em novembro de 1996. Ele era conhecido como RFC 1945 e definia HTTP/1.0.
+
+## HTTP/1.1 – O protocolo padronizado
+
+Enquanto isso, a padronização adequada estava em andamento. Isso aconteceu paralelamente às diversas implementações do HTTP/1.0. A primeira versão padronizada do HTTP, HTTP/1.1, foi publicada no início de 1997, apenas alguns meses depois do HTTP/1.0.
+
+HTTP/1.1 esclareceu ambiguidades e introduziu inúmeras melhorias:
+
+- Uma conexão poderia ser reutilizada, o que economizava tempo. Já não precisava de ser aberto várias vezes para exibir os recursos incorporados no único documento original.
+- Pipelining foi adicionado. Isso permitiu que uma segunda solicitação fosse enviada antes que a resposta à primeira fosse totalmente transmitida. Isso reduziu a latência da comunicação.
+- Respostas fragmentadas também foram suportadas.
+- Mecanismos adicionais de controle de cache foram introduzidos.
+- A negociação de conteúdo, incluindo idioma, codificação e tipo, foi introduzida. Um cliente e um servidor agora poderiam concordar sobre qual conteúdo trocar.
+- Graças ao **Host** cabeçalho, a capacidade de hospedar diferentes domínios do mesmo endereço IP permitiu a colocação de servidores.
+Um fluxo típico de solicitações, através de uma única conexão, era assim:
+
+Solicitacao
+
+    GET /en-US/docs/Glossary/Simple_header HTTP/1.1
+    Host: developer.mozilla.org
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Language: en-US,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
+
+Resposta
+
+    200 OK
+    Connection: Keep-Alive
+    Content-Encoding: gzip
+    Content-Type: text/html; charset=utf-8
+    Date: Wed, 20 Jul 2016 10:55:30 GMT
+    Etag: "547fa7e369ef56031dd3bff2ace9fc0832eb251a"
+    Keep-Alive: timeout=5, max=1000
+    Last-Modified: Tue, 19 Jul 2016 00:59:33 GMT
+    Server: Apache
+    Transfer-Encoding: chunked
+    Vary: Cookie, Accept-Encoding
+
+    (content)
+
+Solicitacao
+
+    GET /static/img/header-background.png HTTP/1.1
+    Host: developer.mozilla.org
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+    Accept: */*
+    Accept-Language: en-US,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
+
+Resposta
+
+    200 OK
+    Age: 9578461
+    Cache-Control: public, max-age=315360000
+    Connection: keep-alive
+    Content-Length: 3077
+    Content-Type: image/png
+    Date: Thu, 31 Mar 2016 13:34:46 GMT
+    Last-Modified: Wed, 21 Oct 2015 18:27:50 GMT
+    Server: Apache
+
+    (image content of 3077 bytes)
+
+HTTP/1.1 foi publicado pela primeira vez como RFC 2068 em janeiro de 1997.
+
+## Mais de 15 anos de extensões
+
+A extensibilidade do HTTP facilitou a criação de novos cabeçalhos e métodos. Embora o protocolo HTTP/1.1 tenha sido refinado em duas revisões, RFC 2616 publicada em junho de 1999 e RFC 7230 - RFC 7235 publicada em junho de 2014 antes do lançamento do HTTP/2, ele permaneceu extremamente estável por mais de 15 anos.
+
+### Usando HTTP para transmissões seguras
+
+A maior mudança no HTTP foi feita no final de 1994. Em vez de enviar HTTP através de uma pilha TCP/IP básica, a empresa de serviços de informática Netscape Communications criou uma camada adicional de transmissão criptografada: SSL. O SSL 1.0 nunca foi lançado ao público, mas o SSL 2.0 e seu sucessor, o SSL 3.0, permitiram a criação de sites de comércio eletrônico. Para isso, criptografaram e garantiram a autenticidade das mensagens trocadas entre servidor e cliente. O SSL acabou sendo padronizado e tornou-se TLS.
+
+Durante o mesmo período, ficou claro que era necessária uma camada de transporte criptografada. A web deixou de ser uma rede predominantemente acadêmica e, em vez disso, tornou-se uma selva onde anunciantes, indivíduos aleatórios e criminosos competiam pelo máximo de dados privados possível. À medida que os aplicativos desenvolvidos sobre HTTP se tornaram mais poderosos e exigiam acesso a informações privadas, como catálogos de endereços, e-mail e localização do usuário, o TLS tornou-se necessário fora do caso de uso de comércio eletrônico.
+
+### Usando HTTP para aplicativos complexos
+
+Tim Berners-Lee originalmente não imaginou o HTTP como um meio somente leitura. Ele queria criar uma web onde as pessoas pudessem adicionar e mover documentos remotamente – uma espécie de sistema de arquivos distribuído. Por volta de 1996, o HTTP foi estendido para permitir a autoria e um padrão chamado WebDAV foi criado. Ele cresceu para incluir aplicativos específicos como CardDAV para lidar com entradas do catálogo de endereços e CalDAV para lidar com calendários. Mas todas essas extensões *DAV tinham uma falha: elas só eram utilizáveis ​​quando implementadas pelos servidores.
+
+Em 2000, um novo padrão para uso de HTTP foi projetado: transferência de estado representacional (ou REST). A API não era baseada nos novos métodos HTTP, mas sim no acesso a URIs específicos com métodos HTTP/1.1 básicos. Isso permitiu que qualquer aplicativo da web permitisse que uma API recuperasse e modificasse seus dados sem precisar atualizar os navegadores ou servidores. Todas as informações necessárias foram incorporadas nos arquivos que os sites veiculavam através do padrão HTTP/1.1. A desvantagem do modelo REST era que cada site definia sua própria API RESTful fora do padrão e tinha controle total sobre ela. Isso diferia das extensões *DAV, onde clientes e servidores eram interoperáveis. APIs RESTful tornaram-se muito comuns na década de 2010.
+
+Desde 2005, mais APIs foram disponibilizadas para páginas da web. Várias dessas APIs criam extensões para o protocolo HTTP para fins específicos:
+
+- **Eventos enviados pelo servidor** , onde o servidor pode enviar mensagens ocasionais para o navegador.
+- **WebSocket** , um novo protocolo que pode ser configurado atualizando uma conexão HTTP existente.
+
+### Relaxando o modelo de segurança da web
+
+O HTTP é independente do modelo de segurança da web, conhecido como política de mesma origem . Na verdade, o modelo atual de segurança web foi desenvolvido após a criação do HTTP! Ao longo dos anos, revelou-se útil levantar algumas restrições desta política sob certas restrições. O servidor transmitiu ao cliente quanto e quando suspender tais restrições usando um novo conjunto de cabeçalhos HTTP. Eles foram definidos em especificações como Cross-Origin Resource Sharing (CORS) e Content Security Policy (CSP).
+
+Além dessas grandes extensões, muitos outros cabeçalhos foram adicionados, às vezes apenas experimentalmente. Cabeçalhos notáveis ​​são o cabeçalho Do Not Track ( DNT) para controlar a privacidade, X-Frame-Optionse Upgrade-Insecure-Requestsmuitos mais existem.
