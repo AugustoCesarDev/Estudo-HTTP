@@ -170,3 +170,34 @@ Desde 2005, mais APIs foram disponibilizadas para páginas da web. Várias dessa
 O HTTP é independente do modelo de segurança da web, conhecido como política de mesma origem . Na verdade, o modelo atual de segurança web foi desenvolvido após a criação do HTTP! Ao longo dos anos, revelou-se útil levantar algumas restrições desta política sob certas restrições. O servidor transmitiu ao cliente quanto e quando suspender tais restrições usando um novo conjunto de cabeçalhos HTTP. Eles foram definidos em especificações como Cross-Origin Resource Sharing (CORS) e Content Security Policy (CSP).
 
 Além dessas grandes extensões, muitos outros cabeçalhos foram adicionados, às vezes apenas experimentalmente. Cabeçalhos notáveis ​​são o cabeçalho Do Not Track ( DNT) para controlar a privacidade, X-Frame-Optionse Upgrade-Insecure-Requestsmuitos mais existem.
+
+## HTTP/2 – Um protocolo para maior desempenho
+
+Com o passar dos anos, as páginas da web se tornaram mais complexas. Alguns deles eram até aplicativos por direito próprio. Mais mídias visuais foram exibidas e o volume e o tamanho dos scripts agregando interatividade também aumentaram. Muito mais dados foram transmitidos por meio de um número significativamente maior de solicitações HTTP e isso criou mais complexidade e sobrecarga para conexões HTTP/1.1. Para dar conta disso, o Google implementou um protocolo experimental SPDY no início de 2010. Essa forma alternativa de troca de dados entre cliente e servidor despertou o interesse de desenvolvedores que trabalham tanto em navegadores quanto em servidores. O SPDY definiu um aumento na capacidade de resposta e resolveu o problema de transmissão duplicada de dados, servindo de base para o protocolo HTTP/2.
+
+O protocolo HTTP/2 difere do HTTP/1.1 em alguns aspectos:
+
+- É um protocolo binário em vez de um protocolo de texto. Não pode ser lido e criado manualmente. Apesar deste obstáculo, permite a implementação de técnicas de otimização melhoradas.
+- É um protocolo multiplexado. Solicitações paralelas podem ser feitas na mesma conexão, removendo as restrições do protocolo HTTP/1.x.
+- Ele compacta cabeçalhos. Como muitas vezes são semelhantes entre um conjunto de solicitações, isso elimina a duplicação e a sobrecarga dos dados transmitidos.
+- Ele permite que um servidor preencha dados em um cache do cliente por meio de um mecanismo chamado server push.
+
+Oficialmente padronizado em maio de 2015, o uso de HTTP/2 atingiu o pico em janeiro de 2022, em 46,9% de todos os sites (veja estas estatísticas ). Sites de alto tráfego mostraram a adoção mais rápida em um esforço para economizar despesas gerais de transferência de dados e orçamentos subsequentes.
+
+Essa rápida adoção ocorreu provavelmente porque o HTTP/2 não exigia alterações em sites e aplicativos. Para utilizá-lo era necessário apenas um servidor atualizado e que se comunicasse com um navegador recente. Apenas um conjunto limitado de grupos foi necessário para desencadear a adoção e, à medida que as versões legadas de navegadores e servidores foram renovadas, o uso aumentou naturalmente, sem trabalho significativo para os desenvolvedores web.
+
+## Evolução pós-HTTP/2
+
+A extensibilidade do HTTP ainda está sendo usada para adicionar novos recursos. Notavelmente, podemos citar novas extensões do protocolo HTTP que surgiram em 2016:
+
+- O suporte Alt-Svcpermitiu a dissociação da identificação e da localização de um determinado recurso. Isso significou um mecanismo de cache CDN mais inteligente .
+- A introdução de dicas de cliente permitiu que o navegador ou cliente comunicasse proativamente informações sobre seus requisitos e restrições de hardware ao servidor.
+- A introdução de prefixos relacionados à segurança no Cookiecabeçalho ajudou a garantir que os cookies seguros não pudessem ser alterados.
+
+## HTTP/3 - HTTP sobre QUIC
+
+A próxima versão principal do HTTP, HTTP/3, tem a mesma semântica das versões anteriores do HTTP, mas usa QUIC em vez de TCP para a parte da camada de transporte. Em outubro de 2022, 26% de todos os sites usavam HTTP/3 .
+
+O QUIC foi projetado para fornecer latência muito menor para conexões HTTP. Assim como o HTTP/2, é um protocolo multiplexado, mas o HTTP/2 é executado em uma única conexão TCP, portanto, a detecção de perda de pacotes e a retransmissão tratadas na camada TCP podem bloquear todos os fluxos. O QUIC executa vários fluxos sobre UDP e implementa detecção e retransmissão de perda de pacotes independentemente para cada fluxo, de modo que, se ocorrer um erro, apenas o fluxo com dados nesse pacote seja bloqueado.
+
+Definido na RFC 9114 , o HTTP/3 é compatível com a maioria dos principais navegadores, incluindo Chromium (e suas variantes como Chrome e Edge) e Firefox.
