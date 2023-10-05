@@ -252,165 +252,213 @@ Content-Encoding
     Usado para especificar o algoritmo de compressão.
 
 Content-Language
+
     Descreve a linguagem destinada ao público, para permitir que um usuário se diferencie de acordo com o idioma preferido dele.
 
 Content-Location
+
     Indica um local alternativo para os dados retornados.
 
 ### Roteamento de mensagens (Proxies)
 
 Forwarded
+
     Contém informações do lado do cliente dos servidores proxy que é alterado ou perdido quando um proxy é envolvido no caminho de uma solicitação.
 
 X-Forwarded-For Non-standard
+
     Identifica os endereços de IP de origem de um cliente que se conecta a um servidor web por meio de um proxy HTTP ou balanceador de carga.
 
 X-Forwarded-Host Non-standard
+
     Identifica o host original que um cliente usou para se conectar ao proxy ou balanceador de carga.
 
 X-Forwarded-Proto Non-standard
+
     Identifica o protocolo (HTTP ou HTTPS) que um cliente usou para se conectar ao seu proxy ou balanceador de carga.
 
 Via
+
     Adicionado por proxies, ambos proxies de encaminhamento (forward) e reverso (reverse), e pode aparecer nos cabeçalhos de solicitação e de resposta.
 
 ### Redirecionamentos
 
 Location
+
     Indica a URL para redirecionar uma página.
 
 ### Contexto da requisição
 
 From
+
     Contém um endereço de e-mail da internet para um usuário humano que controla o agente do usuário solicitante.
 
 Host
+
     Especifica o nome de domínio do servidor (para hospedagem virtual), e (opcionalmente) o número da porta TCP na qual o servidor está ouvindo.
 
 Referer
+
     The address of the previous web page from which a link to the currently requested page was followed.
 
 Referrer-Policy
+
     Governs which referrer information sent in the Referer header should be included with requests made.
 
 User-Agent
+
     Contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent. See also the Firefox user agent string reference (en-US).
 
 ### Contexto da resposta
 
 Allow
+
     Lista o conjunto de métodos de requisição HTTP suportados por um recurso.
 
 Server
+
     Contém informações a respeito do programa utilizado pelo servidor de origem para lidar com a requisição.
 
 ### Requisições Range
 
 Accept-Ranges
+
     Indica se o servidor suporta solicitações de intervalo, se sim, em qual unidade o intervalo pode ser expresso.
 
 Range
+
     Indica a parte de um documento que o servidor deve retornar.
 
 If-Range
+
     Cria uma solicitação de intervalo condicional que é atendida se a etag ou data fornecida no parâmetro corresponde ao recurso remoto. Usado para impedir o download de dois intervalos da versão incompatível do recurso.
 
 Content-Range
+
     Indica onde uma parte da mensagem faz parte de uma mensagem inteira de corpo.
 
 ### Segurança
 
 Content-Security-Policy (CSP (en-US))
+
     Controls resources the user agent is allowed to load for a given page.
 
 Content-Security-Policy-Report-Only
+
     Allows web developers to experiment with policies by monitoring (but not enforcing) their effects. These violation reports consist of JSON documents sent via an HTTP POST request to the specified URI.
 
 Public-Key-Pins (HPKP (en-US))
+
     Associates a specific cryptographic public key with a certain web server to decrease the risk of MITM (en-US) attacks with forged certificates.
 
 Public-Key-Pins-Report-Only
+
     Sends reports to the report-uri specified in the header and does still allow clients to connect to the server even if the pinning is violated.
 
 Strict-Transport-Security (HSTS)
+
     Force communication using HTTPS instead of HTTP.
 
 Upgrade-Insecure-Requests
+
     Sends a signal to the server expressing the client's preference for an encrypted and authenticated response, and that it can successfully handle the upgrade-insecure-requests (en-US) directive.
 
 X-Content-Type-Options
+
     Disables MIME sniffing and forces browser to use the type given in Content-Type.
 
 X-Frame-Options (XFO)
+
     Indicates whether or not a browser should be allowed to render a page in a <frame> (en-US), <iframe> or <object> (en-US)
 
 X-XSS-Protection
+
     Enables cross-site scripting filtering.
 
 ### Server-sent events
 
 Ping-From
+
     ...
 
 Ping-To
+
     ...
 
 Last-Event-ID
+
     ...
 
 ### Transfer coding
 
 Transfer-Encoding
+
     Specifies the the form of encoding used to safely transfer the entity to the user.
 
 TE
+
     Specifies the transfer encodings the user agent is willing to accept.
 
 Trailer
+
     Allows the sender to include additional fields at the end of chunked message.
 
 ### WebSockets
 
 Sec-WebSocket-Key
+
     ...
 
 Sec-WebSocket-Extensions
+
     ...
 
 Sec-WebSocket-Accept (en-US)
+
     ...
 
 Sec-WebSocket-Protocol
+
     ...
 
 Sec-WebSocket-Version
+
     ...
 
 ### Outros
 
 Date
+
     Contém a data e hora em que a mensagem foi produzida.
 
 Link
+
     ...
 
 Retry-After
+
     Indica quanto tempo o User-Agent deve esperar antes de realizar uma requisição de acompanhamento.
 
 Upgrade (en-US)
+
     This is a Proposed Internet Standard. To view a comprehensive list of all Official and Proposed Internet Standards with detailed information about each, visit this Internet Standards reference, which is updated daily. The relevant RFC document for the Upgrade header field standard is RFC 7230, section 6.7. The standard establishes rules for upgrading or changing to a different protocol on the current client, server, transport protocol connection. For example, this header standard allows a client to change from HTTP 1.1 to HTTP 2.0, assuming the server decides to acknowledge and implement the Upgrade header field. Niether party is required to accept the terms specified in the Upgrade header field. It can be used in both client and server headers. If the Upgrade header field is specified, then the sender MUST also send the Connection header field with the upgrade option specified. For details on the Connection header field please see section 6.1 of the aforementioned RFC.
 
 Vary
+
     Determines how to match future request headers to decide whether a cached response can be used rather than requesting a fresh one from the origin server.
 
 X-Content-Duration
+
     ...
 
 X-DNS-Prefetch-Control
+
     Controls DNS prefetching, a feature by which browsers proactively perform domain name resolution on both links that the user may choose to follow as well as URLs for items referenced by the document, including images, CSS, JavaScript, and so forth.
 
 X-Requested-With
+
     ...
 
 X-UA-Compatible
+
     ...
