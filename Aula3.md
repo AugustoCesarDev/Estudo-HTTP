@@ -1,4 +1,5 @@
-Cabeçalhos HTTP
+# Cabeçalhos HTTP
+
 Os cabeçalhos HTTP permitem que o cliente e o servidor passem informações adicionais com a solicitação ou a resposta HTTP. Um cabeçalho de solicitação é composto por seu nome case-insensitive (não diferencia letras maiúsculas e minúsculas), seguido por dois pontos ':' e pelo seu valor (sem quebras de linha). Espaços em branco antes do valor serão ignorados.
 Cabeçalhos proprietários personalizados podem ser adicionados usando o prefixo 'X-', mas essa convenção foi descontinuada em Junho de 2012, devido aos inconvenientes que causou quando os campos não-padronizados tornaram-se padronizados na RFC 6648; outros estão listados em um registro IANA, cujo o conteúdo original foi definido na RFC 4229. O IANA também mantém o registro das propostas de novas mensagens de cabeçalhos HTTP.
 
